@@ -131,18 +131,6 @@ DATABASES = {
     }
 }
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'proshop',
-#        'USER': 'dennisivy',
-#        'PASSWORD': os.environ.get('DB_PASS'),
-#        'HOST': os.environ.get('HOST'),
-#        'PORT': '5432'
-#    }
-# }
 
 
 # Password validation
@@ -197,14 +185,14 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Dont forget to reset database connection and hide password
-AWS_QUERYSTRING_AUTH = False
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_QUERYSTRING_AUTH = False
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = '*'
-AWS_SECRET_ACCESS_KEY = '*'
-# AWS_LOCATION = 'static/'
-AWS_STORAGE_BUCKET_NAME = 'doorsteps-media'
-AWS_DEFAULT_ACL = None
+# AWS_ACCESS_KEY_ID = '*'
+# AWS_SECRET_ACCESS_KEY = '*'
+# # AWS_LOCATION = 'static/'
+# AWS_STORAGE_BUCKET_NAME = 'doorsteps-media'
+# AWS_DEFAULT_ACL = None
 
 if os.getcwd() == '/app':
     DEBUG = False
