@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.db.models import Q
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -16,10 +16,10 @@ def getProducts(request):
     query = request.query_params.get('keyword')
     if query == None:
         query = ''
-
-    products = Product.objects.filter(name__icontains=query).order_by('-createdAt')
-    # products= Product.objects.filter(category__icontains=query).order_by('-createdAt')
-    # products= Product.objects.filter(description__icontains=query).order_by('-createdAt')
+    if Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query) | Q(category__icontains=query)).order_by('-createdAt'):
+        products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query) | Q(category__icontains=query)).order_by('-createdAt')
+    else:
+        products = ''
 
     page = request.query_params.get('page')
     paginator = Paginator(products, 8)
@@ -36,8 +36,11 @@ def getProducts(request):
 
     page = int(page)
     print('Page:', page)
-    serializer = ProductSerializer(products, many=True)
-    return Response({'products': serializer.data, 'page': page, 'pages': paginator.num_pages})
+    if products != '':
+        serializer = ProductSerializer(products, many=True)
+        return Response({'products': serializer.data, 'page': page, 'pages': paginator.num_pages})
+    else:
+        return Response({'products': products, 'page': page, 'pages': paginator.num_pages})
 
 
 @api_view(['GET'])

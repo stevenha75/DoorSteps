@@ -23,7 +23,7 @@ function SearchModal() {
   
     return (
       <>
-        <div onClick={() => setLgShow(true)}><i class="fas fa-search"></i></div>
+        <div onClick={() => setLgShow(true)} style={{cursor:"pointer"}} ><i class="fas fa-search"></i></div>
         
         <Modal
           size="lg"

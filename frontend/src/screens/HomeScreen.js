@@ -24,18 +24,27 @@ function HomeScreen({ history }) {
 
     return (
         <div>
-            {!keyword && <ProductCarousel />}
-            <h1>Latest Products</h1>
+            {!keyword && <ProductCarousel /> }
+            { !keyword  && <h1>Latest Products</h1>}
+            {/* <h1>Latest Products</h1> */}
             {loading ? <Loader />
                 : error ? <Message variant='danger'>{error}</Message>
                     :
                     <div>
                         <Row>
-                            {products.map(product => (
+                                {products != ''?
+                                
+                                products.map(product => (
+                                    
                                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                                     <Product product={product} />
-                                </Col>
-                            ))}
+                                </Col>))
+                                :
+                                <div className="container">
+                                <h2>No search results</h2> 
+                                <h5>Please improve your search</h5>
+                                </div>
+                            }
                         </Row>
                         <Paginate page={page} pages={pages} keyword={keyword} />
                     </div>
