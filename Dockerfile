@@ -1,16 +1,21 @@
-FROM python:3.10.4-slim-bullseye
-# Set environment variables
+FROM python:3.10
 
-ENV PIP_DISABLE_PIP_VERSION_CHECK 1
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set work directory
-WORKDIR /code
+# Set the working directory
+WORKDIR /app
 
-# Install dependencies
+# Copy the requirements file
 COPY ./requirements.txt .
-RUN pip install -r requirements.txt
 
-# Copy project
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application
 COPY . .
+
+# Other commands...
