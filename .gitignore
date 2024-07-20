@@ -2,3 +2,21 @@ myenv/
 nodemodules/
 door-steps/
 resources/
+
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environments
+venv/
+.vnv
+env/
+.env/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
+*.swp
